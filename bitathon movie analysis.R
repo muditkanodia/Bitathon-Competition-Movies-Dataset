@@ -7,6 +7,9 @@ library(psych)
 library(ggeffects)
 library(splines)
 
+#Imported all years Financials worksheet
+#Appended all the dataset from different Financials worksheet into one master dataset
+
 #merging
 f2001 <- read.csv("2001 Financials.csv")
 f2002 <- read.csv("2002 Financials.csv")
@@ -23,6 +26,7 @@ f2012 <- read.csv("2012 Financials.csv")
 f2013 <- read.csv("2013 Financials.csv")
 f2014 <- read.csv("2014 Financials.csv")
 
+#Imported BollywoodMovieDetail dataset
 moviedetail <- read.csv("BollywoodMovieDetail.csv")
 
 #View(f2014)
@@ -35,7 +39,8 @@ View(combined_df)
 #write.csv(combined_df,"Combined_financials.csv")
 combined_df <- read.csv("Combined_financials.csv")
 
-df1<-merge(x=combined_df,y=moviedetail,by.x = "ï..Movie.Name", by.y = "title")
+#Merged master dataset and BollywoodMovieDetail dataset on Movie Name
+df1<-merge(x=combined_df,y=moviedetail,by.x = "Ã¯..Movie.Name", by.y = "title")
 View(df1)
 summary(df1)
 write.csv(df1,"NEWMASTER.CSV")
@@ -44,6 +49,7 @@ View(df)
 
 ndf <- read.csv("NEWMASTER1.CSV")
 View(ndf)
+#Removed unnecessary variables 
 ndf1<-ndf[c("Opening.Day","Opening.Weekend","End.of.Week.1","Lifetime..India.Only..Net.Collection.Crores.in.Release.Year.","FirstWeekIMDBRating")]
 colnames(ndf)
 
@@ -58,6 +64,7 @@ str(df)
 summary(df)
 summary(ndf1)
 
+#End.of.Week.1- converted it from factor to numeric
 ndf1$End.of.Week.1<-as.numeric(ndf1$End.of.Week.1)
 
 
